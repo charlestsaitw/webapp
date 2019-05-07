@@ -1,4 +1,5 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, jsonify, send_from_directory
+from sqlite3 import connect
 app = Flask(__name__)
 
 @app.route("/")
@@ -8,3 +9,16 @@ def hello():
 @app.route("/test")
 def test():
     return render_template('test.html')
+
+@app.route('/js/<path:path>')
+def send_js(path):
+    return send_from_directory('js', path)
+
+@app.route("/list")
+def list():
+    db = connect('test.db')
+    output = []
+    c = db.execute('select name, long_descript from items')
+    for row in c:
+        output.append({'name': row[0], 'url': row[1]})
+    return jsonify(output)
