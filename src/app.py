@@ -1,6 +1,6 @@
 from flask import Flask, render_template, jsonify, send_from_directory
 from sqlite3 import connect
-app = Flask(__name__)
+app = Flask(__name__, template_folder='../dist')
 
 @app.route("/")
 def hello():
@@ -12,7 +12,7 @@ def test():
 
 @app.route('/js/<path:path>')
 def send_js(path):
-    return send_from_directory('js', path)
+    return send_from_directory('../dist', path)
 
 @app.route("/list")
 def list():
