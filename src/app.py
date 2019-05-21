@@ -10,9 +10,13 @@ def hello():
 def test():
     return render_template('test.html')
 
-@app.route('/js/<path:path>')
-def send_js(path):
-    return send_from_directory('../dist', path)
+# @app.route('/js/<path:path>')
+# def send_js(path):
+#     return send_from_directory('../dist', path)
+
+@app.route('/app_bundle.js')
+def send_js():
+    return send_from_directory('../dist', 'app_bundle.js')
 
 @app.route("/list")
 def list():
