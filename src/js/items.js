@@ -2,16 +2,22 @@ import { render } from 'react-dom';
 const domContainer = document.getElementById("app");
 // import BootstrapBtn from './bootstrapBtn';
 // import data from './data';
-import {Navbar, Nav, NavDropdown, Form, FormControl, Button} from 'react-bootstrap'
+import {Navbar, Nav, NavDropdown, Form, FormControl, Button} from 'react-bootstrap';
+let key = '#home'
+function handleSelect(selectedKey) {
+  console.log(selectedKey);
+  key = selectedKey;
+};
 render(
     (
       <Navbar bg="light" expand="lg">
-  <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
+  <Navbar.Brand href="#home" onClick={handleSelect}>React-Bootstrap</Navbar.Brand>
   <Navbar.Toggle aria-controls="basic-navbar-nav" />
   <Navbar.Collapse id="basic-navbar-nav">
-    <Nav className="mr-auto">
-      <Nav.Link href="#home">Home</Nav.Link>
-      <Nav.Link href="#link">Link</Nav.Link>
+    <Nav className="mr-auto"   activeKey={key}
+  onSelect={selectedKey => handleSelect(selectedKey)}>
+      <Nav.Link href="#home" onClick={handleSelect}>Home</Nav.Link>
+      <Nav.Link href="#link" onClick={handleSelect}>Link</Nav.Link>
       <NavDropdown title="Dropdown" id="basic-nav-dropdown">
         <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
         <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
